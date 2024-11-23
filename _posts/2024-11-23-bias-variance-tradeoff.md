@@ -13,18 +13,17 @@ In this post, I'm going to explain bias and variance completely.
 
 ## Conceptual Introduction
 
-Casually speaking, bias is the error that is introduced by approximating a real-life problem, which may be extremely complicated, by a much simpler model. In this case, you are making some 
-oversimplistic assumptions to make the problem solvable. However, these assumptions may not be true in real life. So, the model you have built is biased. High bias leads to underfitting, which means the model is too simple to capture the underlying structure of the data. Such a model would not be able to behave well on both the training and test sets.
+At its core, **bias** refers to the error introduced when a model makes overly simplistic assumptions about a complex real-world problem. These assumptions simplify the problem to make it solvable, but they can lead to inaccuracies. A model with high bias often fails to capture the underlying patterns in the data, resulting in **underfitting**. This means the model performs poorly on both the training data and unseen test data.
 
-Consider a problem of classifying dogs into two breeds. You have a dataset of dogs with their features (e.g., height, weight, color, etc.) and labels (breed). You build a model which assuming all dogs are of the same breed (say breed A). This model is biased since it makes this oversimplistic assumption. 
+For example, consider a classification task to identify dog breeds based on certain features like height, weight, and color. If the model assumes all dogs belong to the same breed (say, breed A), it simplifies the problem too much, ignoring the distinctive features that separate breeds. This oversimplification introduces bias.
 
-Variance, on the other hand, shows how much a model's predictions change (or vary) when it is trained on different training sets. High variance results in overfitting, which means the model behaves good on the training data, while it fails to generalize well on the test data. This behavior is due to the model's sensitivity to the training set and the noise in the data. In other words, the model learns some patterns which are not really there! 
+On the other hand, **variance** measures the sensitivity of a model to fluctuations in the training data. A model with high variance captures noise or irrelevant patterns from the training data, leading to **overfitting**. Such a model may perform exceptionally well on the training data but generalize poorly to new, unseen data.
 
-Consider the same problem of classifying dogs into their breeds where the input is an image of a dog. A model of high variance would learn some unrelated patterns in the training set, such as the background of the images, the color of the dogs, etc. These patterns are not related to the breed of the dog, but the model learns them since they are present in the training set.
+Returning to the dog classification example, a high-variance model might pick up on irrelevant details, like the background of the training images or the lighting conditions, and mistakenly treat these as important features for classifying breeds. This results in a model that is overly complex and fails to generalize.
 
 ## The Math Behind Bias and Variance Trade-off
 
-First, let us fix some notations. You have a hypothesis set $H$, which is basically the set of all functions you can accept as your final model. Note that your basic assumption is that there is a function $f$ (the true function) which represents the relation between features and labels. For a classification problem, it means that $f$ can take features of the training samples and map them to the labels of the corresponding samples. In other words, $f$ is the best function you're looking for. However, unfortunately, you don't know $f$. Instead, you have the outputs given by it for some specific inputs, and you call inputs and outputs together "the training set". Denote this set by $D$.
+Let us formalize these concepts mathematically. You have a hypothesis set $H$, which is basically the set of all functions you can accept as your final model. Note that your basic assumption is that there is a function $f$ (the true function) which represents the relation between features and labels. For a classification problem, it means that $f$ can take features of the training samples and map them to the labels of the corresponding samples. In other words, $f$ is the best function you're looking for. However, unfortunately, you don't know $f$. Instead, you have the outputs given by it for some specific inputs, and you call inputs and outputs together "the training set". Denote this set by $D$.
 
 From the functions available in $H$, you will finally choose a model (a function) $h_D$ based on the $D$ you were given and a learning algorithm $A$ which is not our focus in this post. Obviously, since $f$ might not really exist or it may not be a true "function" (e.g., the real behavior of the data might be stochastic, leading to an $f$ which gives different outputs given the same input), you might not find a perfect $h_D$ which is equal to $f$. So, what should you do in this situation?
 
@@ -102,12 +101,20 @@ This is the decomposition of the error into two parts. The first part is the var
 
 > Variance shows the average difference between $h_D(x)$ (the models output) and $\bar{h}(x)$ (the average of the models output). Bias shows the average difference between $\bar{h}(x)$ and $f(x)$ (the true function). In other words, variance shows how much the model is sensitive to the training set. Bias says no matter how hard you try, your average model will (probably) never be equal to the true relation $f$.
 
+## Key Insights and Practical Implications
+
+- **Bias** leads to underfitting: The model is too simplistic to capture the data's complexity.
+- **Variance** leads to overfitting: The model is too sensitive to the training data and captures noise as if it were signal.
+- Smaller datasets benefit from simpler models to avoid overfitting. Larger datasets can support more complex models without excessive variance.
+- The goal is to strike a balance between bias and variance, finding a model that minimizes the total error.
+
+> **Summary**: Bias measures how far the average prediction is from the true function, while variance measures how much predictions vary across different datasets. A good model strikes a balance, avoiding both underfitting and overfitting.
+
 ## Points to Remember
 
-- Bias is the error introduced by approximating a real-life problem by a much simpler model.
-- Variance is the error introduced by approximating a real-life problem by a much more complex model (the model outputs change significantly when trained on different training sets).
-- Bias leads to underfitting, while variance leads to overfitting.
-- For smaller datasets, it is better to use a simpler model to avoid overfitting. For larger datasets, you can use a more complex model.
-- Your goal should be to find a model with low bias and low variance. However, in practice, it is not always possible to find such a model. So, you have to choose a model which has a balance between bias and variance.
-- If you reduce bias by increasing the complexity of the model, you will increase the variance. If you reduce variance by simplifying the model, you will increase the bias.
+- **High bias** = Strong assumptions, simple models, underfitting.
+- **High variance** = Complex models, overly flexible, overfitting.
+- Balance is key: Neither extreme leads to optimal performance.
+- The dataset size and problem complexity play significant roles in determining the ideal model complexity.
 
+Understanding the bias-variance trade-off is crucial for building machine learning models that generalize well to unseen data, ensuring both accuracy and reliability.

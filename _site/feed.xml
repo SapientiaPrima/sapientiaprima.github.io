@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-11-23T20:31:55+03:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sapientia Prima</title><subtitle>Disce fundamenta intelligentiae artificialis.</subtitle><author><name>Discipulus</name></author><entry><title type="html">Bias-Variance Trade-off</title><link href="http://localhost:4000/bias-variance-tradeoff" rel="alternate" type="text/html" title="Bias-Variance Trade-off" /><published>2024-11-23T00:00:00+03:30</published><updated>2024-11-23T00:00:00+03:30</updated><id>http://localhost:4000/bias-variance-tradeoff</id><content type="html" xml:base="http://localhost:4000/bias-variance-tradeoff"><![CDATA[<h1 id="so-what-is-bias-variance-trade-off">So, what is Bias Variance Trade-off?</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-11-23T20:35:44+03:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sapientia Prima</title><subtitle>Disce fundamenta intelligentiae artificialis.</subtitle><author><name>Discipulus</name></author><entry><title type="html">Bias-Variance Trade-off</title><link href="http://localhost:4000/bias-variance-tradeoff" rel="alternate" type="text/html" title="Bias-Variance Trade-off" /><published>2024-11-23T00:00:00+03:30</published><updated>2024-11-23T00:00:00+03:30</updated><id>http://localhost:4000/bias-variance-tradeoff</id><content type="html" xml:base="http://localhost:4000/bias-variance-tradeoff"><![CDATA[<h1 id="so-what-is-bias-variance-trade-off">So, what is Bias Variance Trade-off?</h1>
 
 <p>In this post, I’m going to explain bias and variance completely.</p>
 
 <h2 id="conceptual-introduction">Conceptual Introduction</h2>
 
-<p>Casually speaking, bias is the error that is introduced by approximating a real-life problem, which may be extremely complicated, by a much simpler model. In this case, you are making some 
-oversimplistic assumptions to make the problem solvable. However, these assumptions may not be true in real life. So, the model you have built is biased. High bias leads to underfitting, which means the model is too simple to capture the underlying structure of the data. Such a model would not be able to behave well on both the training and test sets.</p>
+<p>At its core, <strong>bias</strong> refers to the error introduced when a model makes overly simplistic assumptions about a complex real-world problem. These assumptions simplify the problem to make it solvable, but they can lead to inaccuracies. A model with high bias often fails to capture the underlying patterns in the data, resulting in <strong>underfitting</strong>. This means the model performs poorly on both the training data and unseen test data.</p>
 
-<p>Consider a problem of classifying dogs into two breeds. You have a dataset of dogs with their features (e.g., height, weight, color, etc.) and labels (breed). You build a model which assuming all dogs are of the same breed (say breed A). This model is biased since it makes this oversimplistic assumption.</p>
+<p>For example, consider a classification task to identify dog breeds based on certain features like height, weight, and color. If the model assumes all dogs belong to the same breed (say, breed A), it simplifies the problem too much, ignoring the distinctive features that separate breeds. This oversimplification introduces bias.</p>
 
-<p>Variance, on the other hand, shows how much a model’s predictions change (or vary) when it is trained on different training sets. High variance results in overfitting, which means the model behaves good on the training data, while it fails to generalize well on the test data. This behavior is due to the model’s sensitivity to the training set and the noise in the data. In other words, the model learns some patterns which are not really there!</p>
+<p>On the other hand, <strong>variance</strong> measures the sensitivity of a model to fluctuations in the training data. A model with high variance captures noise or irrelevant patterns from the training data, leading to <strong>overfitting</strong>. Such a model may perform exceptionally well on the training data but generalize poorly to new, unseen data.</p>
 
-<p>Consider the same problem of classifying dogs into their breeds where the input is an image of a dog. A model of high variance would learn some unrelated patterns in the training set, such as the background of the images, the color of the dogs, etc. These patterns are not related to the breed of the dog, but the model learns them since they are present in the training set.</p>
+<p>Returning to the dog classification example, a high-variance model might pick up on irrelevant details, like the background of the training images or the lighting conditions, and mistakenly treat these as important features for classifying breeds. This results in a model that is overly complex and fails to generalize.</p>
 
 <h2 id="the-math-behind-bias-and-variance-trade-off">The Math Behind Bias and Variance Trade-off</h2>
 
-<p>First, let us fix some notations. You have a hypothesis set $H$, which is basically the set of all functions you can accept as your final model. Note that your basic assumption is that there is a function $f$ (the true function) which represents the relation between features and labels. For a classification problem, it means that $f$ can take features of the training samples and map them to the labels of the corresponding samples. In other words, $f$ is the best function you’re looking for. However, unfortunately, you don’t know $f$. Instead, you have the outputs given by it for some specific inputs, and you call inputs and outputs together “the training set”. Denote this set by $D$.</p>
+<p>Let us formalize these concepts mathematically. You have a hypothesis set $H$, which is basically the set of all functions you can accept as your final model. Note that your basic assumption is that there is a function $f$ (the true function) which represents the relation between features and labels. For a classification problem, it means that $f$ can take features of the training samples and map them to the labels of the corresponding samples. In other words, $f$ is the best function you’re looking for. However, unfortunately, you don’t know $f$. Instead, you have the outputs given by it for some specific inputs, and you call inputs and outputs together “the training set”. Denote this set by $D$.</p>
 
 <p>From the functions available in $H$, you will finally choose a model (a function) $h_D$ based on the $D$ you were given and a learning algorithm $A$ which is not our focus in this post. Obviously, since $f$ might not really exist or it may not be a true “function” (e.g., the real behavior of the data might be stochastic, leading to an $f$ which gives different outputs given the same input), you might not find a perfect $h_D$ which is equal to $f$. So, what should you do in this situation?</p>
 
@@ -93,16 +92,29 @@ oversimplistic assumptions to make the problem solvable. However, these assumpti
   <p>Variance shows the average difference between $h_D(x)$ (the models output) and $\bar{h}(x)$ (the average of the models output). Bias shows the average difference between $\bar{h}(x)$ and $f(x)$ (the true function). In other words, variance shows how much the model is sensitive to the training set. Bias says no matter how hard you try, your average model will (probably) never be equal to the true relation $f$.</p>
 </blockquote>
 
+<h2 id="key-insights-and-practical-implications">Key Insights and Practical Implications</h2>
+
+<ul>
+  <li><strong>Bias</strong> leads to underfitting: The model is too simplistic to capture the data’s complexity.</li>
+  <li><strong>Variance</strong> leads to overfitting: The model is too sensitive to the training data and captures noise as if it were signal.</li>
+  <li>Smaller datasets benefit from simpler models to avoid overfitting. Larger datasets can support more complex models without excessive variance.</li>
+  <li>The goal is to strike a balance between bias and variance, finding a model that minimizes the total error.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Summary</strong>: Bias measures how far the average prediction is from the true function, while variance measures how much predictions vary across different datasets. A good model strikes a balance, avoiding both underfitting and overfitting.</p>
+</blockquote>
+
 <h2 id="points-to-remember">Points to Remember</h2>
 
 <ul>
-  <li>Bias is the error introduced by approximating a real-life problem by a much simpler model.</li>
-  <li>Variance is the error introduced by approximating a real-life problem by a much more complex model (the model outputs change significantly when trained on different training sets).</li>
-  <li>Bias leads to underfitting, while variance leads to overfitting.</li>
-  <li>For smaller datasets, it is better to use a simpler model to avoid overfitting. For larger datasets, you can use a more complex model.</li>
-  <li>Your goal should be to find a model with low bias and low variance. However, in practice, it is not always possible to find such a model. So, you have to choose a model which has a balance between bias and variance.</li>
-  <li>If you reduce bias by increasing the complexity of the model, you will increase the variance. If you reduce variance by simplifying the model, you will increase the bias.</li>
-</ul>]]></content><author><name>Discipulus</name></author><category term="journal" /><category term="machine learning" /><category term="bias" /><category term="variance" /><category term="tradeoff" /><category term="interview" /><summary type="html"><![CDATA[So, what is Bias Variance Trade-off?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/bias-variance-tradeoff.jpg" /><media:content medium="image" url="http://localhost:4000/bias-variance-tradeoff.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Sapientia Prima is Alive!</title><link href="http://localhost:4000/sapientia-is-live" rel="alternate" type="text/html" title="Sapientia Prima is Alive!" /><published>2024-11-14T00:00:00+03:30</published><updated>2024-11-14T00:00:00+03:30</updated><id>http://localhost:4000/sapientia-is-live</id><content type="html" xml:base="http://localhost:4000/sapientia-is-live"><![CDATA[<p>Lagrange is a minimalist Jekyll theme. The purpose of this theme is to provide a simple, clean, content-focused blogging platform for your personal site or blog. Below you can find everything you need to get started.</p>
+  <li><strong>High bias</strong> = Strong assumptions, simple models, underfitting.</li>
+  <li><strong>High variance</strong> = Complex models, overly flexible, overfitting.</li>
+  <li>Balance is key: Neither extreme leads to optimal performance.</li>
+  <li>The dataset size and problem complexity play significant roles in determining the ideal model complexity.</li>
+</ul>
+
+<p>Understanding the bias-variance trade-off is crucial for building machine learning models that generalize well to unseen data, ensuring both accuracy and reliability.</p>]]></content><author><name>Discipulus</name></author><category term="journal" /><category term="machine learning" /><category term="bias" /><category term="variance" /><category term="tradeoff" /><category term="interview" /><summary type="html"><![CDATA[So, what is Bias Variance Trade-off?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/bias-variance-tradeoff.jpg" /><media:content medium="image" url="http://localhost:4000/bias-variance-tradeoff.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Sapientia Prima is Alive!</title><link href="http://localhost:4000/sapientia-is-live" rel="alternate" type="text/html" title="Sapientia Prima is Alive!" /><published>2024-11-14T00:00:00+03:30</published><updated>2024-11-14T00:00:00+03:30</updated><id>http://localhost:4000/sapientia-is-live</id><content type="html" xml:base="http://localhost:4000/sapientia-is-live"><![CDATA[<p>Lagrange is a minimalist Jekyll theme. The purpose of this theme is to provide a simple, clean, content-focused blogging platform for your personal site or blog. Below you can find everything you need to get started.</p>
 
 <h2 id="getting-started">Getting Started</h2>
 
