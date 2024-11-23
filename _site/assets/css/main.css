@@ -6,6 +6,7 @@ body {
   font-size: 18px;
   color: #505050;
   line-height: 1.75rem;
+  text-align: justify;
 }
 
 @media (max-width: 30em) {
