@@ -7,6 +7,20 @@
 		<atom:link href="/rss-feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Bias-Variance Trade-off</title>
+				
+					<dc:creator>Discipulus</dc:creator>
+				
+				
+					<description>&lt;h1 id=&quot;so-what-is-bias-variance-trade-off&quot;&gt;So, what is Bias Variance Trade-off?&lt;/h1&gt;
+</description>
+				
+				<pubDate>Sat, 23 Nov 2024 00:00:00 +0330</pubDate>
+				<link>http://localhost:4000/bias-variance-tradeoff</link>
+				<guid isPermaLink="true">http://localhost:4000/bias-variance-tradeoff</guid>
+			</item>
+		
+			<item>
 				<title>Sapientia Prima is Alive!</title>
 				
 					<dc:creator>Discipulus</dc:creator>
