@@ -133,6 +133,72 @@
 
 \[\mathbb{E}_D[(h_D(x) - f(x))^2]\]
 
+<p>Now let us use some tricks to decompose this error. First, we can write it as:</p>
+
+\[\mathbb{E}_D[(h_D(x) - f(x))^2] = \mathbb{E}_D[(h_D(x) - C + C - f(x))^2]\]
+
+<p>Note that the only difference between the two sides of the equation is the addition of $C$ and the subtraction of it. $C$ is now just a constant and we will define it later. Now, define:</p>
+
+\[A := h_D(x)-C\]
+
+\[B := C-f(x)\]
+
+<p>Then, we can rewrite the error as:</p>
+
+\[\mathbb{E}_D[A^2] + \mathbb{E}_D[B^2] + 2\mathbb{E}_D[AB]\]
+
+<p>We decomposed the sum since the expectation of the sum is equal to the sum of the expectations. Now, let’s focus on the last term. We can write it as:</p>
+
+\[\mathbb{E}_D[AB] = \mathbb{E}_D[(h_D(x)-C)(C-f(x))]\]
+
+<p>But since $C-f(x)$ is independent of $D$, we can write it as:</p>
+
+\[\mathbb{E}_D[AB] = (C-f(x))\mathbb{E}_D[h_D(x)-C]\]
+
+<p>Now, let’s define $C$ as the expectation of $h_D(x)$:</p>
+
+\[C := \mathbb{E}_D[h_D(x)]\]
+
+<p>Then, the last term becomes:</p>
+
+\[\mathbb{E}_D[AB] = (C-f(x))(C-C) = 0\]
+
+<p>So, the error becomes:</p>
+
+\[\mathbb{E}_D[A^2] + \mathbb{E}_D[B^2]\]
+
+<p>Let’s focus on the first term. We can write it as:</p>
+
+\[\mathbb{E}_D[A^2] = \mathbb{E}_D[(h_D(x)-C)^2]\]
+
+<p>But since $C$ is the expectation of $h_D(x)$, we can write it as:</p>
+
+\[\mathbb{E}_D[A^2] = \mathbb{E}_D[(h_D(x)-\mathbb{E}_D[h_D(x)])^2]\]
+
+<p>$C$ is somehow the $\bar{h}(x)$, the average of the outputs of the model, based on different training sets. So, we can write the error as:</p>
+
+\[\mathbb{E}_D[A^2] = \mathbb{E}_D[(h_D(x)-\bar{h}(x))^2]\]
+
+<p>Now, let’s focus on the second term. We can write it as:</p>
+
+\[\mathbb{E}_D[B^2] = \mathbb{E}_D[(C-f(x))^2]\]
+
+<p>But since $C$ is the expectation of $h_D(x)$, we can write it as:</p>
+
+\[\mathbb{E}_D[B^2] = \mathbb{E}_D[(\mathbb{E}_D[h_D(x)]-f(x))^2]\]
+
+<p>Remember! $C$ is the $\bar{h}(x)$, the average of the outputs of the model, based on different training sets. So, we can write the error as:</p>
+
+\[\mathbb{E}_D[B^2] = \mathbb{E}_D[(\bar{h}(x)-f(x))^2]\]
+
+<p>Now, we can write the error as:</p>
+
+\[\mathbb{E}_D[(h_D(x) - f(x))^2] = 
+\underbrace{\mathbb{E}_D[(h_D(x)-\bar{h}(x))^2]}_{\text{Variance}} + 
+\underbrace{\mathbb{E}_D[(\bar{h}(x)-f(x))^2]}_{\text{Bias}^2}\]
+
+<p>This is the decomposition of the error into two parts. The first part is the variance of the model, and the second part is the bias of the model. The variance of the model is the expected error of the model with respect to different training sets. The bias of the model is the expected error of the model with respect to different true functions. The bias-variance trade-off is the trade-off between these two errors. The goal is to find a model which has a low bias and a low variance. However, in practice, it is not always possible to find a model with both low bias and low variance. So, you have to choose a model which has a balance between bias and variance.</p>
+
 </article>
 
   <span class="post-date">
