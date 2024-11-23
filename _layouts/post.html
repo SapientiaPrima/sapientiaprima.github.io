@@ -20,6 +20,10 @@ layout: default
 {% if site.hide_related_posts != true %}
   {% include related-posts.html %}
 {% endif %}
+{% if post.tags.size > 0 %}
+  Tag{% if post.tags.size > 1 %}s{% endif %}:
+  {{ post.tags | sort | join: ", " }}
+{% endif %}
 {% if site.data.settings.disqus.comments %}
   {% include disqus.html %}
 {% endif %}
