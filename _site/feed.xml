@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-11-23T20:35:44+03:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sapientia Prima</title><subtitle>Disce fundamenta intelligentiae artificialis.</subtitle><author><name>Discipulus</name></author><entry><title type="html">Bias-Variance Trade-off</title><link href="http://localhost:4000/bias-variance-tradeoff" rel="alternate" type="text/html" title="Bias-Variance Trade-off" /><published>2024-11-23T00:00:00+03:30</published><updated>2024-11-23T00:00:00+03:30</updated><id>http://localhost:4000/bias-variance-tradeoff</id><content type="html" xml:base="http://localhost:4000/bias-variance-tradeoff"><![CDATA[<h1 id="so-what-is-bias-variance-trade-off">So, what is Bias Variance Trade-off?</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-11-23T20:38:04+03:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sapientia Prima</title><subtitle>Disce fundamenta intelligentiae artificialis.</subtitle><author><name>Discipulus</name></author><entry><title type="html">Bias-Variance Trade-off</title><link href="http://localhost:4000/bias-variance-tradeoff" rel="alternate" type="text/html" title="Bias-Variance Trade-off" /><published>2024-11-23T00:00:00+03:30</published><updated>2024-11-23T00:00:00+03:30</updated><id>http://localhost:4000/bias-variance-tradeoff</id><content type="html" xml:base="http://localhost:4000/bias-variance-tradeoff"><![CDATA[<h1 id="so-what-is-bias-variance-trade-off">So, what is Bias Variance Trade-off?</h1>
 
 <p>In this post, I’m going to explain bias and variance completely.</p>
 
@@ -91,6 +91,32 @@
 <blockquote>
   <p>Variance shows the average difference between $h_D(x)$ (the models output) and $\bar{h}(x)$ (the average of the models output). Bias shows the average difference between $\bar{h}(x)$ and $f(x)$ (the true function). In other words, variance shows how much the model is sensitive to the training set. Bias says no matter how hard you try, your average model will (probably) never be equal to the true relation $f$.</p>
 </blockquote>
+
+<h3 id="summary-of-the-math-section">Summary of the math section:</h3>
+
+<p>Assume there is a true underlying function ( f(x) ) that maps inputs to outputs. However, since this true function is unknown, we attempt to approximate it using a model ( h_D(x) ), trained on a dataset ( D ).</p>
+
+<p>The expected error for a fixed input ( x ) is given by:</p>
+
+\[\mathbb{E}_D[(h_D(x) - f(x))^2]\]
+
+<p>This error can be decomposed into two key components: bias and variance. After applying some mathematical transformations, we arrive at:</p>
+
+\[\mathbb{E}_D[(h_D(x) - f(x))^2] = 
+\underbrace{\mathbb{E}_D[(h_D(x) - \bar{h}(x))^2]}_{\text{Variance}} + 
+\underbrace{(\bar{h}(x) - f(x))^2}_{\text{Bias}^2}\]
+
+<p>Here:</p>
+<ul>
+  <li><strong>Variance</strong>: $\mathbb{E}_D[(h_D(x) - \bar{h}(x))^2]$, the variability of the model’s predictions $h_D(x)$ around the mean prediction $\bar{h}(x)$. This captures the model’s sensitivity to changes in the training data.</li>
+  <li><strong>Bias</strong>: $(\bar{h}(x) - f(x))^2$, the difference between the average model prediction $\bar{h}(x)$ and the true function $f(x)$. It reflects how far the model’s predictions are from the true relationship.</li>
+</ul>
+
+<p>The total error is the sum of these two components. The <strong>bias-variance trade-off</strong> arises because reducing one often increases the other. For example:</p>
+<ul>
+  <li>Increasing model complexity reduces bias but increases variance.</li>
+  <li>Simplifying the model reduces variance but increases bias.</li>
+</ul>
 
 <h2 id="key-insights-and-practical-implications">Key Insights and Practical Implications</h2>
 

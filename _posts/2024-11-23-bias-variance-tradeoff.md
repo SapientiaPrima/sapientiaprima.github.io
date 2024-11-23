@@ -101,6 +101,32 @@ This is the decomposition of the error into two parts. The first part is the var
 
 > Variance shows the average difference between $h_D(x)$ (the models output) and $\bar{h}(x)$ (the average of the models output). Bias shows the average difference between $\bar{h}(x)$ and $f(x)$ (the true function). In other words, variance shows how much the model is sensitive to the training set. Bias says no matter how hard you try, your average model will (probably) never be equal to the true relation $f$.
 
+### Summary of the math section:
+
+Assume there is a true underlying function \( f(x) \) that maps inputs to outputs. However, since this true function is unknown, we attempt to approximate it using a model \( h_D(x) \), trained on a dataset \( D \).
+
+The expected error for a fixed input \( x \) is given by:
+
+$$
+\mathbb{E}_D[(h_D(x) - f(x))^2]
+$$
+
+This error can be decomposed into two key components: bias and variance. After applying some mathematical transformations, we arrive at:
+
+$$
+\mathbb{E}_D[(h_D(x) - f(x))^2] = 
+\underbrace{\mathbb{E}_D[(h_D(x) - \bar{h}(x))^2]}_{\text{Variance}} + 
+\underbrace{(\bar{h}(x) - f(x))^2}_{\text{Bias}^2}
+$$
+
+Here:
+- **Variance**: $\mathbb{E}_D[(h_D(x) - \bar{h}(x))^2]$, the variability of the model's predictions $h_D(x)$ around the mean prediction $\bar{h}(x)$. This captures the model's sensitivity to changes in the training data.
+- **Bias**: $(\bar{h}(x) - f(x))^2$, the difference between the average model prediction $\bar{h}(x)$ and the true function $f(x)$. It reflects how far the model's predictions are from the true relationship.
+
+The total error is the sum of these two components. The **bias-variance trade-off** arises because reducing one often increases the other. For example:
+- Increasing model complexity reduces bias but increases variance.
+- Simplifying the model reduces variance but increases bias.
+
 ## Key Insights and Practical Implications
 
 - **Bias** leads to underfitting: The model is too simplistic to capture the data's complexity.
