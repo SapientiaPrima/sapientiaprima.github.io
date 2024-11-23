@@ -4,7 +4,7 @@ title: "Bias-Variance Trade-off"
 author: "Discipulus"
 categories: journal
 tags: [ machine learning, bias, variance, tradeoff, interview]
-image: mountains.jpg
+image: bias-variance-tradeoff.jpg
 ---
 
 # So, what is Bias Variance Trade-off?
