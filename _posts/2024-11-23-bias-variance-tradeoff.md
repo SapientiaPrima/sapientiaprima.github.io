@@ -101,3 +101,13 @@ $$
 This is the decomposition of the error into two parts. The first part is the variance of the model, and the second part is the bias of the model. The variance of the model is the expected error of the model with respect to different training sets. The bias of the model is the expected error of the model with respect to different true functions. The bias-variance trade-off is the trade-off between these two errors. The goal is to find a model which has a low bias and a low variance. However, in practice, it is not always possible to find a model with both low bias and low variance. So, you have to choose a model which has a balance between bias and variance.
 
 > Variance shows the average difference between $h_D(x)$ (the models output) and $\bar{h}(x)$ (the average of the models output). Bias shows the average difference between $\bar{h}(x)$ and $f(x)$ (the true function). In other words, variance shows how much the model is sensitive to the training set. Bias says no matter how hard you try, your average model will (probably) never be equal to the true relation $f$.
+
+## Points to Remember
+
+- Bias is the error introduced by approximating a real-life problem by a much simpler model.
+- Variance is the error introduced by approximating a real-life problem by a much more complex model (the model outputs change significantly when trained on different training sets).
+- Bias leads to underfitting, while variance leads to overfitting.
+- For smaller datasets, it is better to use a simpler model to avoid overfitting. For larger datasets, you can use a more complex model.
+- Your goal should be to find a model with low bias and low variance. However, in practice, it is not always possible to find such a model. So, you have to choose a model which has a balance between bias and variance.
+- If you reduce bias by increasing the complexity of the model, you will increase the variance. If you reduce variance by simplifying the model, you will increase the bias.
+

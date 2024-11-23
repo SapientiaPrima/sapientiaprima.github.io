@@ -214,6 +214,18 @@ oversimplistic assumptions to make the problem solvable. However, these assumpti
   <p>Variance shows the average difference between $h_D(x)$ (the models output) and $\bar{h}(x)$ (the average of the models output). Bias shows the average difference between $\bar{h}(x)$ and $f(x)$ (the true function). In other words, variance shows how much the model is sensitive to the training set. Bias says no matter how hard you try, your average model will (probably) never be equal to the true relation $f$.</p>
 </blockquote>
 
+<h2 id="points-to-remember">Points to Remember</h2>
+
+<ul>
+  <li>Bias is the error introduced by approximating a real-life problem by a much simpler model.</li>
+  <li>Variance is the error introduced by approximating a real-life problem by a much more complex model (the model outputs change significantly when trained on different training sets).</li>
+  <li>Bias leads to underfitting, while variance leads to overfitting.</li>
+  <li>For smaller datasets, it is better to use a simpler model to avoid overfitting. For larger datasets, you can use a more complex model.</li>
+  <li>Your goal should be to find a model with low bias and low variance. However, in practice, it is not always possible to find such a model. So, you have to choose a model which has a balance between bias and variance.</li>
+  <li>If you reduce bias by increasing the complexity of the model, you will increase the variance. If you reduce variance by simplifying the model, you will increase the bias.</li>
+</ul>
+
+
 </article>
 
   <span class="post-date">
