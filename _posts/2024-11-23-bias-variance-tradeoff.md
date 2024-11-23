@@ -9,7 +9,7 @@ image: bias-variance-tradeoff.jpg
 
 # So, what is Bias Variance Trade-off?
 
-In this post, I'm going to explain bias and variance completely. 
+In this post, we will dive deep into the concepts of bias and variance, exploring their significance in machine learning and their trade-off.
 
 ## Conceptual Introduction
 
