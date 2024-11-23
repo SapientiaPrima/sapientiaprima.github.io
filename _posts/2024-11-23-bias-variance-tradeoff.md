@@ -9,7 +9,18 @@ image: bias-variance-tradeoff.jpg
 
 # So, what is Bias Variance Trade-off?
 
-In this post, I'm going to explain bias and variance completely.
+In this post, I'm going to explain bias and variance completely. 
+
+## Conceptual Introduction
+
+Casually, bias is the error that is introduced by approximating a real-life problem, which may be extremely complicated, by a much simpler model. In this case, you are making some 
+oversimplistic assumptions to make the problem solvable. However, these assumptions may not be true in real life. So, the model you have built is biased. High bias leads to underfitting, which means the model is too simple to capture the underlying structure of the data. Such a model would not be able to behave well on both the training and test sets.
+
+Consider a problem of classifying dogs into two breeds. You have a dataset of dogs with their features (e.g., height, weight, color, etc.) and labels (breed). You build a model which assuming all dogs are of the same breed (say breed A). This model is biased since it makes this oversimplistic assumption. 
+
+Variance, on the other hand, shows how much a model's predictions change (or vary) when it is trained on different training sets. High variance results in overfitting, which means the model behaves good on the training data, while it fails to generalize well on the test data. This behavior is due to the model's sensitivity to the training set and the noise in the data. In other words, the model learns some patterns which are not really there! 
+
+Consider the same problem of classifying dogs into their breeds where the input is an image of a dog. A model of high variance would learn some unrelated patterns in the training set, such as the background of the images, the color of the dogs, etc. These patterns are not related to the breed of the dog, but the model learns them since they are present in the training set.
 
 ## The Math Behind Bias and Variance Trade-off
 
