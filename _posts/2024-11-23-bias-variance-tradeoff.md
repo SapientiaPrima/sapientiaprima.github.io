@@ -3,7 +3,7 @@ layout: post
 title: "Bias-Variance Trade-off"
 author: "Discipulus"
 categories: journal
-tags: [machine learning,bias,variance,tradeoff,interview]
+tags: [ machine learning, bias, variance, tradeoff, interview]
 image: mountains.jpg
 ---
 
